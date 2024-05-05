@@ -86,10 +86,11 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
+              Flexible(
+                  child: Padding(
                 padding: EdgeInsets.fromLTRB(0, 0, 0, 16),
-                child: Flexible(child: ListOfArticleCard()),
-              ),
+                child: ListOfArticleCard(),
+              )),
             ]),
       ),
     );
