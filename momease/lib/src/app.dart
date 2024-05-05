@@ -65,6 +65,7 @@ class MomEaseApp extends StatelessWidget {
 
             // Define a function to handle named routes in order to support
             // Flutter web url navigation and deep linking.
+            // TODO: change this routing using BLoC and Cubit
             onGenerateRoute: (RouteSettings routeSettings) {
               return MaterialPageRoute<void>(
                 settings: routeSettings,
@@ -81,7 +82,7 @@ class MomEaseApp extends StatelessWidget {
                 },
               );
             },
-
+            // TODO: change this to splash screen
             home: const Landing(),
           );
         },
