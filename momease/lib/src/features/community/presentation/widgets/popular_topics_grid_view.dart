@@ -8,6 +8,7 @@ class PopularTopicsGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.count(
         shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
         crossAxisCount: 2,
         crossAxisSpacing: 8,
         mainAxisSpacing: 16,
