@@ -17,7 +17,7 @@ class HomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                padding: EdgeInsets.symmetric(horizontal: 16),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
                 child: DailyMotivationCard(),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -52,7 +52,7 @@ class HomePage extends StatelessWidget {
               ),
               Flexible(child: ListOfTherapyCard()),
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -68,11 +68,11 @@ class HomePage extends StatelessWidget {
               ),
               Flexible(child: ListOfExerciseCard()),
               Padding(
-                padding: EdgeInsets.fromLTRB(16, 16, 16, 8),
+                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                 child: CallHelpCard(),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(

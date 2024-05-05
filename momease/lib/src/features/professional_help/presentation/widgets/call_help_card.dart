@@ -39,7 +39,7 @@ class CallHelpCard extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 4),
+              padding: EdgeInsets.symmetric(vertical: 8),
               child: Align(
                   alignment: Alignment.centerRight, child: CallHelpButton()),
             ),
