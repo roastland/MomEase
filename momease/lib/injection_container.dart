@@ -3,6 +3,11 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:momease/src/core/database/database.dart';
 import 'package:momease/src/core/navigation_bar/cubit/custom_navigation_bar_cubit.dart';
 import 'package:momease/src/core/network/network_info.dart';
+import 'package:momease/src/features/articles/data/datasources/article_local_data_source.dart';
+import 'package:momease/src/features/articles/data/repositories/article_repository_impl.dart';
+import 'package:momease/src/features/articles/domain/repositories/article_repository.dart';
+import 'package:momease/src/features/articles/domain/usecases/get_article_list.dart';
+import 'package:momease/src/features/articles/presentation/bloc/articles_bloc.dart';
 import 'package:momease/src/features/exercise/data/datasources/exercise_local_data_source.dart';
 import 'package:momease/src/features/exercise/data/repositories/exercise_repository_impl.dart';
 import 'package:momease/src/features/exercise/domain/repositories/exercise_repository.dart';
@@ -18,39 +23,30 @@ final sl = GetIt.instance;
 
 Future<void> init() async {
   // Features
-  sl.registerFactory(
-    () => TherapyBloc(
-      getTherapyList: sl(),
-    ),
-  );
-  sl.registerFactory(
-    () => ExerciseBloc(getExerciseList: sl()),
-  );
+  sl.registerFactory(() => TherapyBloc(getTherapyList: sl()));
+  sl.registerFactory(() => ExerciseBloc(getExerciseList: sl()));
+  sl.registerFactory(() => ArticlesBloc(getArticleList: sl()));
 
   // Use cases
   sl.registerLazySingleton(() => GetTherapyList(sl()));
   sl.registerLazySingleton(() => GetExerciseList(sl()));
+  sl.registerLazySingleton(() => GetArticleList(sl()));
 
   // Repository
   sl.registerLazySingleton<TherapyRepository>(
-    () => TherapyRepositoryImpl(
-      localDataSource: sl(),
-    ),
-  );
+      () => TherapyRepositoryImpl(localDataSource: sl()));
   sl.registerLazySingleton<ExerciseRepository>(
       () => ExerciseRepositoryImpl(localDataSource: sl()));
+  sl.registerLazySingleton<ArticleRepository>(
+      () => ArticleRepositoryImpl(localDataSource: sl()));
 
   // Data sources
   sl.registerLazySingleton<TherapyLocalDataSource>(
-    () => TherapyLocalDataSourceImpl(
-      database: sl(),
-    ),
-  );
+      () => TherapyLocalDataSourceImpl(database: sl()));
   sl.registerLazySingleton<ExerciseLocalDataSource>(
-    () => ExerciseLocalDataSourceImpl(
-      database: sl(),
-    ),
-  );
+      () => ExerciseLocalDataSourceImpl(database: sl()));
+  sl.registerLazySingleton<ArticleLocalDataSource>(
+      () => ArticleLocalDataSourceImpl(database: sl()));
 
   // Core
   sl.registerFactory(() => CustomNavigationBarCubit());
