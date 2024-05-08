@@ -1,4 +1,11 @@
 part of 'exercise_bloc.dart';
 
 @immutable
-sealed class ExerciseEvent {}
+abstract class ExerciseEvent extends Equatable {
+  const ExerciseEvent();
+
+  @override
+  List<Object> get props => [];
+}
+
+class FetchExerciseList extends ExerciseEvent {}
