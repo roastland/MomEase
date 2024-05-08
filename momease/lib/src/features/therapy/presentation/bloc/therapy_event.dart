@@ -1,4 +1,11 @@
 part of 'therapy_bloc.dart';
 
 @immutable
-sealed class TherapyEvent {}
+abstract class TherapyEvent extends Equatable {
+  const TherapyEvent();
+
+  @override
+  List<Object> get props => [];
+}
+
+class FetchTherapyList extends TherapyEvent {}
