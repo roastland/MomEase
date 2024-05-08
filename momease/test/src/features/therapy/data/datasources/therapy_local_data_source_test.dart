@@ -27,16 +27,17 @@ void main() {
       final Map<String, dynamic> jsonMap =
           await parseJsonFromAssets('./assets/json_data/therapy.json');
       final data = jsonMap['data'];
-      final tTherapyList = [data[0], data[1]]
-          .map((therapy) => TherapyModel.fromJson(therapy))
-          .toList();
+      final tTherapyList =
+          List.generate(data.length, (int index) => data[index])
+              .map((therapy) => TherapyModel.fromJson(therapy))
+              .toList();
 
       // arrange
-      when(mockDatabase.readTherapy()).thenAnswer((_) async => tTherapyList);
+      when(mockDatabase.readAllTherapy()).thenAnswer((_) async => tTherapyList);
       // act
       final result = await dataSource.getTherapyList();
       // assert
-      verify(mockDatabase.readTherapy());
+      verify(mockDatabase.readAllTherapy());
       expect(result, equals(tTherapyList));
     });
 
@@ -44,11 +45,11 @@ void main() {
         'should return an empty list when there is no therapy data in the database',
         () async {
       // arrange
-      when(mockDatabase.readTherapy()).thenAnswer((_) async => []);
+      when(mockDatabase.readAllTherapy()).thenAnswer((_) async => []);
       // act
       final result = await dataSource.getTherapyList();
       // assert
-      verify(mockDatabase.readTherapy());
+      verify(mockDatabase.readAllTherapy());
       expect(result, equals([]));
     });
   });

@@ -17,10 +17,10 @@ class TherapyRepositoryImpl implements TherapyRepository {
     final Map<String, dynamic> jsonMap =
         await parseJsonFromAssets('./assets/json_data/therapy.json');
     final data = jsonMap['data'];
-    final tTherapyList = [data[0], data[1]]
+    final therapyList = List.generate(data.length, (int index) => data[index])
         .map((therapy) => TherapyModel.fromJson(therapy))
         .toList();
-    localDataSource.cacheTherapies(tTherapyList);
+    localDataSource.cacheTherapies(therapyList);
 
     try {
       final localTherapy = await localDataSource.getTherapyList();

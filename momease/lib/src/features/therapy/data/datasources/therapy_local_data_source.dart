@@ -15,7 +15,7 @@ class TherapyLocalDataSourceImpl implements TherapyLocalDataSource {
 
   @override
   Future<List<TherapyModel>> getTherapyList() async {
-    return await _database.readTherapy();
+    return await _database.readAllTherapy();
   }
 
   @override

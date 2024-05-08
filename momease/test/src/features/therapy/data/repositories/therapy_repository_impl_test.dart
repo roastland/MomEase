@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -37,6 +39,8 @@ void main() {
   final tTherapyList = [tTherapy1, tTherapy2];
 
   group('getTherapyList', () {
+    WidgetsFlutterBinding.ensureInitialized();
+
     test('should call getTherapyList from the local data source', () async {
       // arrange
       when(mockLocalDataSource.getTherapyList())
