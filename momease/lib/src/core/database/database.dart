@@ -1,3 +1,4 @@
+import 'package:momease/src/features/articles/data/models/article_model.dart';
 import 'package:momease/src/features/exercise/data/models/exercise_model.dart';
 import 'package:momease/src/features/therapy/data/models/therapy_model.dart';
 import 'package:path/path.dart';
@@ -56,6 +57,18 @@ class AppDatabase {
         PRIMARY KEY (id)
       )
     ''',
+    3: '''
+      CREATE TABLE article (
+        id INTEGER NOT NULL,
+        title TEXT NOT NULL,
+        imageUrl TEXT NOT NULL,
+        description TEXT,
+        readingTime INTEGER NOT NULL,
+        author TEXT NOT NULL,
+        publishedOn TEXT NOT NULL,
+        PRIMARY KEY (id)
+      )
+    '''
   };
 
   Future<int> createTherapy(TherapyModel therapy) async {
@@ -70,6 +83,12 @@ class AppDatabase {
         conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
+  Future<int> createArticle(ArticleModel article) async {
+    final db = await instance.database;
+    return await db.insert('article', article.toJson(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+
   Future<List<TherapyModel>> readAllTherapy() async {
     final db = await instance.database;
     final maps = await db.query('therapy');
@@ -80,6 +99,12 @@ class AppDatabase {
     final db = await instance.database;
     final maps = await db.query('exercise');
     return maps.map((json) => ExerciseModel.fromJson(json)).toList();
+  }
+
+  Future<List<ArticleModel>> readAllArticle() async {
+    final db = await instance.database;
+    final maps = await db.query('article');
+    return maps.map((json) => ArticleModel.fromJson(json)).toList();
   }
 
   Future updateTherapy(TherapyModel therapy) async {
@@ -104,6 +129,17 @@ class AppDatabase {
     );
   }
 
+  Future updateArticle(ArticleModel article) async {
+    final db = await instance.database;
+    await db.update(
+      'article',
+      article.toJson(),
+      where: 'id = ?',
+      whereArgs: [article.id],
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
   Future<int> deleteSelectedTherapy(int id) async {
     final db = await instance.database;
     return await db.delete(
@@ -122,6 +158,15 @@ class AppDatabase {
     );
   }
 
+  Future<int> deleteSelectedArticle(int id) async {
+    final db = await instance.database;
+    return await db.delete(
+      'article',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
   Future<int> deleteAllTherapy() async {
     final db = await instance.database;
     return await db.delete('therapy');
@@ -132,9 +177,15 @@ class AppDatabase {
     return await db.delete('exercise');
   }
 
+  Future<int> deleteAllArticle() async {
+    final db = await instance.database;
+    return await db.delete('article');
+  }
+
   Future deleteAllTable() async {
     await deleteAllTherapy();
     await deleteAllExercise();
+    await deleteAllArticle();
   }
 
   Future close() async {

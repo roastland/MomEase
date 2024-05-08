@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:momease/src/core/database/database.dart';
+import 'package:momease/src/features/articles/data/models/article_model.dart';
 import 'package:momease/src/features/exercise/data/models/exercise_model.dart';
 import 'package:momease/src/features/therapy/data/models/therapy_model.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
@@ -47,6 +48,30 @@ Future main() async {
   Future<void> insertAllExercise() async {
     await AppDatabase.instance.createExercise(tExercise1);
     await AppDatabase.instance.createExercise(tExercise2);
+  }
+
+  final tArticle1 = ArticleModel(
+    id: 1,
+    title: 'Understanding the Postpartum Blues: When Joy is Met with Tears',
+    imageUrl: 'imageUrl',
+    description: '',
+    readingTime: 3,
+    author: 'Dr. Cresya N.',
+    publishedOn: DateTime(2024, 2, 22),
+  );
+  final tArticle2 = ArticleModel(
+    id: 2,
+    title: 'Building a Happy Haven: Nurturing Joy for Mom and Baby',
+    imageUrl: 'imageUrl',
+    description: '',
+    readingTime: 5,
+    author: 'Dr. Cresya N.',
+    publishedOn: DateTime(2024, 2, 22),
+  );
+
+  Future<void> insertAllArticle() async {
+    await AppDatabase.instance.createArticle(tArticle1);
+    await AppDatabase.instance.createArticle(tArticle2);
   }
 
   group("therapy", () {
@@ -99,6 +124,33 @@ Future main() async {
         final result = await AppDatabase.instance.readAllExercise();
         // assert
         expect(result, [tExercise1, tExercise2]);
+      },
+    );
+  });
+
+  group("article", () {
+    test(
+      'should return empty list when there is no article data in the database',
+      () async {
+        // arrange
+        await AppDatabase.instance.deleteAllTable();
+        // act
+        final result = await AppDatabase.instance.readAllArticle();
+        // assert
+        expect(result, []);
+      },
+    );
+
+    test(
+      'should return all article data from the database',
+      () async {
+        // arrange
+        await AppDatabase.instance.deleteAllTable();
+        // act
+        await insertAllArticle();
+        final result = await AppDatabase.instance.readAllArticle();
+        // assert
+        expect(result, [tArticle1, tArticle2]);
       },
     );
   });
