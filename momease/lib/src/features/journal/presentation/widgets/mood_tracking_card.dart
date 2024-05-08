@@ -5,6 +5,13 @@ class MoodTrackingCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(height: 150, child: Placeholder());
+    return SizedBox(
+        height: 150,
+        child: Container(
+          color: Colors.blue,
+          child: const Column(
+            children: [],
+          ),
+        ));
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:momease/src/features/community/presentation/widgets/community_search_bar.dart';
 import 'package:momease/src/features/community/presentation/widgets/popular_topics_grid_view.dart';
 
@@ -7,13 +8,13 @@ class CommunityPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Padding(
+            const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: Align(
                 alignment: Alignment.centerLeft,
@@ -28,7 +29,7 @@ class CommunityPage extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: Align(
                 alignment: Alignment.centerLeft,
@@ -43,10 +44,10 @@ class CommunityPage extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
+            const Padding(
                 padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                 child: SizedBox(height: 45, child: CommunitySearchBar())),
-            Padding(
+            const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: Align(
                 alignment: Alignment.centerLeft,
@@ -63,8 +64,18 @@ class CommunityPage extends StatelessWidget {
             ),
             Flexible(
                 child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: PopularTopicsGridView(),
+              padding: const EdgeInsets.all(8.0),
+              child: LayoutBuilder(
+                builder: (BuildContext context, BoxConstraints constraints) {
+                  if (constraints.maxWidth <= 600) {
+                    return const PopularTopicsGridView(gridCount: 2);
+                  } else if (constraints.maxWidth <= 1200) {
+                    return const PopularTopicsGridView(gridCount: 4);
+                  } else {
+                    return const PopularTopicsGridView(gridCount: 6);
+                  }
+                },
+              ),
             )),
           ],
         ),

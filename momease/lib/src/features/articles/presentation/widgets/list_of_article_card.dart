@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
 import 'package:momease/src/features/articles/presentation/widgets/article_card.dart';
 
 class ListOfArticleCard extends StatefulWidget {

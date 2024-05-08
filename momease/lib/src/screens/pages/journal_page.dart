@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:momease/src/features/journal/presentation/widgets/add_journal_button.dart';
 import 'package:momease/src/features/journal/presentation/widgets/journal_search_bar.dart';
-import 'package:momease/src/features/journal/presentation/widgets/mood_difference_card.dart';
+// import 'package:momease/src/features/journal/presentation/widgets/mood_difference_card.dart';
 import 'package:momease/src/features/journal/presentation/widgets/mood_tracking_card.dart';
 
 class JournalPage extends StatelessWidget {
@@ -33,25 +34,25 @@ class JournalPage extends StatelessWidget {
             Padding(
                 padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                 child: MoodTrackingCard()),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Latest",
-                  // selectionColor: primaryTextColor,
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      // color: primaryTextColor,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-              child: MoodDifferenceCard(),
-            ),
+            // Padding(
+            //   padding: EdgeInsets.symmetric(horizontal: 16),
+            //   child: Align(
+            //     alignment: Alignment.centerLeft,
+            //     child: Text(
+            //       "Latest",
+            //       // selectionColor: primaryTextColor,
+            //       textAlign: TextAlign.start,
+            //       style: TextStyle(
+            //           // color: primaryTextColor,
+            //           fontSize: 20,
+            //           fontWeight: FontWeight.w500),
+            //     ),
+            //   ),
+            // ),
+            // Padding(
+            //   padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            //   child: MoodDifferenceCard(),
+            // ),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               child: Row(

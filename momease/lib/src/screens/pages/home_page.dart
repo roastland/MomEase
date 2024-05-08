@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:momease/src/features/articles/presentation/widgets/list_of_article_card.dart';
 import 'package:momease/src/features/daily_motivation/presentation/widgets/daily_motivation_card.dart';
 import 'package:momease/src/features/exercise/presentation/widgets/list_of_exercise_card.dart';
@@ -68,7 +69,7 @@ class HomePage extends StatelessWidget {
               ),
               Flexible(child: ListOfExerciseCard()),
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                 child: CallHelpCard(),
               ),
               Padding(

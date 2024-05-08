@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
 import 'package:momease/src/features/exercise/presentation/widgets/exercise_card.dart';
 
 class ListOfExerciseCard extends StatefulWidget {
