@@ -4,13 +4,13 @@
       "id": 1,
       "title": "Music Therapy",
       "description": "",
-      "imageUrl": "./assets/images/flutter_logo.png"
+      "imageUrl": "./assets/images/therapy/music_therapy.jpg"
     },
     {
       "id": 2,
       "title": "Art Therapy",
       "description": "",
-      "imageUrl": "./assets/images/flutter_logo.png"
+      "imageUrl": "./assets/images/therapy/art_therapy.jpg"
     }
   ]
 }

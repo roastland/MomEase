@@ -3,19 +3,19 @@
     {
       "id": 1,
       "title": "Yoga Exercise",
-      "imageUrl": "./assets/images/flutter_logo.png",
+      "imageUrl": "./assets/images/exercise/yoga_exercise.jpg",
       "description": ""
     },
     {
       "id": 2,
       "title": "Breathing Exercise",
-      "imageUrl": "./assets/images/flutter_logo.png",
+      "imageUrl": "./assets/images/exercise/breathing_exercise.png",
       "description": ""
     },
     {
       "id": 3,
       "title": "Walking Exercise",
-      "imageUrl": "./assets/images/flutter_logo.png",
+      "imageUrl": "./assets/images/exercise/walking_exercise.jpg",
       "description": ""
     }
   ]

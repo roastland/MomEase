@@ -1,0 +1,52 @@
+{
+  "data": [
+    {
+      "date": "2024-05-01 00:00:00.000",
+      "title": "New Year's Day",
+      "mood": "Amazing",
+      "journal_text": "I had a great day today. I went to the beach and had a picnic with my friends. We played volleyball and had a great time. I can't wait for the rest of the year!"
+    },
+    {
+      "date": "2024-05-02 00:00:00.000",
+      "title": "Independence Day",
+      "mood": "Good",
+      "journal_text": "Today was a great day. I went to a barbecue with my family and watched fireworks. I love celebrating the 4th of July!"
+    },
+    {
+      "date": "2024-05-03 00:00:00.000",
+      "title": "Halloween",
+      "mood": "Normal",
+      "journal_text": "I had so much fun today. I dressed up as a witch and went trick-or-treating with my friends. We got so much candy! I can't wait to eat it all."
+    },
+    {
+      "date": "2024-05-04 00:00:00.000",
+      "title": "Thanksgiving",
+      "mood": "Bad",
+      "journal_text": "Today was a great day. I spent the day with my family and ate a delicious meal. I am so thankful for all the blessings in my life."
+    },
+    {
+      "date": "2024-05-05 00:00:00.000",
+      "title": "Christmas",
+      "mood": "Terrible",
+      "journal_text": "Today was a magical day. I spent Christmas with my family and we exchanged gifts. I got everything I wanted and more. I love the holiday season!"
+    },
+    {
+      "date": "2024-05-06 00:00:00.000",
+      "title": "New Year's Eve",
+      "mood": "Amazing",
+      "journal_text": "Today was a great day. I went to a New Year's Eve party with my friends and had a blast. We danced and sang all night. I can't wait to see what the new year brings!"
+    },
+    {
+      "date": "2024-05-07 00:00:00.000",
+      "title": "Valentine's Day",
+      "mood": "Good",
+      "journal_text": "Today was a great day. I spent Valentine's Day with my significant other and we had a romantic dinner. I love spending time with them."
+    },
+    {
+      "date": "2024-05-08 00:00:00.000",
+      "title": "Easter",
+      "mood": "Normal",
+      "journal_text": "Today was a great day. I spent Easter with my family and we had a delicious meal. I love spending time with my loved ones."
+    }
+  ]
+}
