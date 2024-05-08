@@ -6,6 +6,7 @@ import 'package:momease/injection_container.dart';
 import 'package:momease/src/core/navigation_bar/cubit/custom_navigation_bar_cubit.dart';
 import 'package:momease/src/core/navigation_bar/custom_navigation_bar.dart';
 import 'package:momease/src/core/settings/settings_view.dart';
+import 'package:momease/src/features/exercise/presentation/bloc/exercise_bloc.dart';
 import 'package:momease/src/features/therapy/presentation/bloc/therapy_bloc.dart';
 import 'package:momease/src/screens/pages/community_page.dart';
 import 'package:momease/src/screens/pages/home_page.dart';
@@ -31,6 +32,9 @@ class Landing extends StatelessWidget {
         ),
         BlocProvider<TherapyBloc>(
           create: (context) => sl<TherapyBloc>(),
+        ),
+        BlocProvider<ExerciseBloc>(
+          create: (context) => sl<ExerciseBloc>(),
         ),
       ],
       child: BlocConsumer<CustomNavigationBarCubit, CustomNavigationBarState>(
