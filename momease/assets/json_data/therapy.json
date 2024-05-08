@@ -1,0 +1,16 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "title": "Music Therapy",
+      "description": "",
+      "imageUrl": "./assets/images/flutter_logo.png"
+    },
+    {
+      "id": 2,
+      "title": "Art Therapy",
+      "description": "",
+      "imageUrl": "./assets/images/flutter_logo.png"
+    }
+  ]
+}
