@@ -1,3 +1,4 @@
+import 'package:momease/src/features/exercise/data/models/exercise_model.dart';
 import 'package:momease/src/features/therapy/data/models/therapy_model.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -46,6 +47,15 @@ class AppDatabase {
         PRIMARY KEY (id)
       )
     ''',
+    2: '''
+      CREATE TABLE exercise (
+        id INTEGER NOT NULL,
+        title TEXT NOT NULL,
+        imageUrl TEXT NOT NULL,
+        description TEXT,
+        PRIMARY KEY (id)
+      )
+    ''',
   };
 
   Future<int> createTherapy(TherapyModel therapy) async {
@@ -54,10 +64,22 @@ class AppDatabase {
         conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
-  Future<List<TherapyModel>> readTherapy() async {
+  Future<int> createExercise(ExerciseModel exercise) async {
+    final db = await instance.database;
+    return await db.insert('exercise', exercise.toJson(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+
+  Future<List<TherapyModel>> readAllTherapy() async {
     final db = await instance.database;
     final maps = await db.query('therapy');
     return maps.map((json) => TherapyModel.fromJson(json)).toList();
+  }
+
+  Future<List<ExerciseModel>> readAllExercise() async {
+    final db = await instance.database;
+    final maps = await db.query('exercise');
+    return maps.map((json) => ExerciseModel.fromJson(json)).toList();
   }
 
   Future updateTherapy(TherapyModel therapy) async {
@@ -71,10 +93,30 @@ class AppDatabase {
     );
   }
 
+  Future updateExercise(ExerciseModel exercise) async {
+    final db = await instance.database;
+    await db.update(
+      'exercise',
+      exercise.toJson(),
+      where: 'id = ?',
+      whereArgs: [exercise.id],
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
   Future<int> deleteSelectedTherapy(int id) async {
     final db = await instance.database;
     return await db.delete(
       'therapy',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
+  Future<int> deleteSelectedExercise(int id) async {
+    final db = await instance.database;
+    return await db.delete(
+      'exercise',
       where: 'id = ?',
       whereArgs: [id],
     );
@@ -85,8 +127,14 @@ class AppDatabase {
     return await db.delete('therapy');
   }
 
+  Future<int> deleteAllExercise() async {
+    final db = await instance.database;
+    return await db.delete('exercise');
+  }
+
   Future deleteAllTable() async {
     await deleteAllTherapy();
+    await deleteAllExercise();
   }
 
   Future close() async {
