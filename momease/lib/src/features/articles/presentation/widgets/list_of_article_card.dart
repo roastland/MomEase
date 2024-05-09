@@ -31,7 +31,7 @@ class _ListOfArticleCardState extends State<ListOfArticleCard> {
           return const Center(child: CircularProgressIndicator());
         } else if (state is ArticlesLoaded) {
           return SizedBox(
-            height: 100.0,
+            height: 250,
             child: PageView.builder(
               itemCount: state.articlesList.length,
               controller: PageController(viewportFraction: 0.8),
@@ -41,8 +41,20 @@ class _ListOfArticleCardState extends State<ListOfArticleCard> {
                   duration: const Duration(milliseconds: 400),
                   curve: Curves.fastOutSlowIn,
                   padding: EdgeInsets.all(cardIdx == index ? 0.0 : 8.0),
-                  child: ArticleCard(
-                      articleList: state.articlesList, articleIdx: index),
+                  child: GestureDetector(
+                    onTap: () {
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => ArticleDetailPage(
+                      //       article: state.articlesList[index],
+                      //     ),
+                      //   ),
+                      // );
+                    },
+                    child: ArticleCard(
+                        articleList: state.articlesList, articleIdx: index),
+                  ),
                 );
               },
             ),

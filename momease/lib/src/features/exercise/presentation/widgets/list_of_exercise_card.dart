@@ -31,7 +31,7 @@ class _ListOfExerciseCardState extends State<ListOfExerciseCard> {
           return const Center(child: CircularProgressIndicator());
         } else if (state is ExerciseLoaded) {
           return SizedBox(
-            height: 100.0,
+            height: 180,
             child: PageView.builder(
               itemCount: state.exerciseList.length,
               controller: PageController(viewportFraction: 0.8),
@@ -41,8 +41,20 @@ class _ListOfExerciseCardState extends State<ListOfExerciseCard> {
                   duration: const Duration(milliseconds: 400),
                   curve: Curves.fastOutSlowIn,
                   padding: EdgeInsets.all(cardIdx == index ? 0.0 : 8.0),
-                  child: ExerciseCard(
-                      exerciseList: state.exerciseList, exerciseIdx: index),
+                  child: GestureDetector(
+                    onTap: () {
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => ExerciseDetailPage(
+                      //       exercise: state.exerciseList[index],
+                      //     ),
+                      //   ),
+                      // );
+                    },
+                    child: ExerciseCard(
+                        exerciseList: state.exerciseList, exerciseIdx: index),
+                  ),
                 );
               },
             ),

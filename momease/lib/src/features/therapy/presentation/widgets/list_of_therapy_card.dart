@@ -31,7 +31,7 @@ class _ListOfTherapyCardState extends State<ListOfTherapyCard> {
           return const Center(child: CircularProgressIndicator());
         } else if (state is TherapyLoaded) {
           return SizedBox(
-            height: 100.0,
+            height: 180,
             child: PageView.builder(
               itemCount: state.therapyList.length,
               controller: PageController(viewportFraction: 0.8),
@@ -41,8 +41,20 @@ class _ListOfTherapyCardState extends State<ListOfTherapyCard> {
                   duration: const Duration(milliseconds: 400),
                   curve: Curves.fastOutSlowIn,
                   padding: EdgeInsets.all(cardIdx == index ? 0.0 : 8.0),
-                  child: TherapyCard(
-                      therapyList: state.therapyList, therapyIdx: index),
+                  child: GestureDetector(
+                    onTap: () {
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => TherapyDetailPage(
+                      //       therapy: state.therapyList[index],
+                      //     ),
+                      //   ),
+                      // );
+                    },
+                    child: TherapyCard(
+                        therapyList: state.therapyList, therapyIdx: index),
+                  ),
                 );
               },
             ),

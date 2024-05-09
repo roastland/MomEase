@@ -22,6 +22,7 @@ dependencies:
   fluttertoast: ^8.2.5
   get_it: ^7.7.0
   internet_connection_checker: ^1.0.0+1
+  intl: ^0.18.1
   meta: ^1.11.0
   path: ^1.9.0
   sqflite: ^2.3.3+1
@@ -45,5 +46,9 @@ flutter:
   assets:
     # Add assets from the images directory to the application.
     - assets/images/
+    - assets/images/article/
+    - assets/images/community/
+    - assets/images/exercise/
+    - assets/images/therapy/
     # Add assets from the json_data directory to the application.
     - assets/json_data/
