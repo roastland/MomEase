@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:momease/src/core/database/database.dart';
 import 'package:momease/src/features/articles/data/models/article_model.dart';
+import 'package:momease/src/features/community/data/models/community_model.dart';
 import 'package:momease/src/features/exercise/data/models/exercise_model.dart';
 import 'package:momease/src/features/therapy/data/models/therapy_model.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
@@ -72,6 +73,26 @@ Future main() async {
   Future<void> insertAllArticle() async {
     await AppDatabase.instance.createArticle(tArticle1);
     await AppDatabase.instance.createArticle(tArticle2);
+  }
+
+  const tCommunity1 = CommunityModel(
+    id: 1,
+    topic: 'topic',
+    imageUrl: 'imageUrl',
+    description: 'description',
+    countPost: 10000,
+  );
+  const tCommunity2 = CommunityModel(
+    id: 2,
+    topic: 'topic',
+    imageUrl: 'imageUrl',
+    description: 'description',
+    countPost: 10000,
+  );
+
+  Future<void> insertAllCommunity() async {
+    await AppDatabase.instance.createCommunity(tCommunity1);
+    await AppDatabase.instance.createCommunity(tCommunity2);
   }
 
   group("therapy", () {
@@ -151,6 +172,33 @@ Future main() async {
         final result = await AppDatabase.instance.readAllArticle();
         // assert
         expect(result, [tArticle1, tArticle2]);
+      },
+    );
+  });
+
+  group("community", () {
+    test(
+      'should return empty list when there is no community data in the database',
+      () async {
+        // arrange
+        await AppDatabase.instance.deleteAllTable();
+        // act
+        final result = await AppDatabase.instance.readAllCommunity();
+        // assert
+        expect(result, []);
+      },
+    );
+
+    test(
+      'should return all community data from the database',
+      () async {
+        // arrange
+        await AppDatabase.instance.deleteAllTable();
+        // act
+        await insertAllCommunity();
+        final result = await AppDatabase.instance.readAllCommunity();
+        // assert
+        expect(result, [tCommunity1, tCommunity2]);
       },
     );
   });

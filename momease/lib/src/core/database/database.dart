@@ -1,4 +1,5 @@
 import 'package:momease/src/features/articles/data/models/article_model.dart';
+import 'package:momease/src/features/community/data/models/community_model.dart';
 import 'package:momease/src/features/exercise/data/models/exercise_model.dart';
 import 'package:momease/src/features/therapy/data/models/therapy_model.dart';
 import 'package:path/path.dart';
@@ -68,6 +69,16 @@ class AppDatabase {
         publishedOn TEXT NOT NULL,
         PRIMARY KEY (id)
       )
+    ''',
+    4: '''
+      CREATE TABLE community (
+        id INTEGER NOT NULL,
+        topic TEXT NOT NULL,
+        imageUrl TEXT NOT NULL,
+        description TEXT NOT NULL,
+        countPost INTEGER NOT NULL,
+        PRIMARY KEY (id)
+      )
     '''
   };
 
@@ -89,6 +100,12 @@ class AppDatabase {
         conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
+  Future<int> createCommunity(CommunityModel community) async {
+    final db = await instance.database;
+    return await db.insert('community', community.toJson(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+
   Future<List<TherapyModel>> readAllTherapy() async {
     final db = await instance.database;
     final maps = await db.query('therapy');
@@ -105,6 +122,12 @@ class AppDatabase {
     final db = await instance.database;
     final maps = await db.query('article');
     return maps.map((json) => ArticleModel.fromJson(json)).toList();
+  }
+
+  Future<List<CommunityModel>> readAllCommunity() async {
+    final db = await instance.database;
+    final maps = await db.query('community');
+    return maps.map((json) => CommunityModel.fromJson(json)).toList();
   }
 
   Future updateTherapy(TherapyModel therapy) async {
@@ -140,6 +163,17 @@ class AppDatabase {
     );
   }
 
+  Future updateCommunity(CommunityModel community) async {
+    final db = await instance.database;
+    await db.update(
+      'community',
+      community.toJson(),
+      where: 'id = ?',
+      whereArgs: [community.id],
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
   Future<int> deleteSelectedTherapy(int id) async {
     final db = await instance.database;
     return await db.delete(
@@ -167,6 +201,15 @@ class AppDatabase {
     );
   }
 
+  Future<int> deleteSelectedCommunity(int id) async {
+    final db = await instance.database;
+    return await db.delete(
+      'community',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
   Future<int> deleteAllTherapy() async {
     final db = await instance.database;
     return await db.delete('therapy');
@@ -182,10 +225,16 @@ class AppDatabase {
     return await db.delete('article');
   }
 
+  Future<int> deleteAllCommunity() async {
+    final db = await instance.database;
+    return await db.delete('community');
+  }
+
   Future deleteAllTable() async {
     await deleteAllTherapy();
     await deleteAllExercise();
     await deleteAllArticle();
+    await deleteAllCommunity();
   }
 
   Future close() async {
