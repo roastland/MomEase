@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:momease/src/features/exercise/data/models/exercise_model.dart';
+import 'package:momease/src/features/exercise/domain/entities/exercise_entity.dart';
 
 void main() {
   const tExerciseModel = ExerciseModel(
@@ -10,7 +11,7 @@ void main() {
 
   test('should be a subclass of ExerciseEntity', () {
     // assert
-    expect(tExerciseModel, isA<ExerciseModel>());
+    expect(tExerciseModel, isA<ExerciseEntity>());
   });
 
   group('fromJson', () {

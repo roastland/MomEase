@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:momease/src/features/articles/data/models/article_model.dart';
+import 'package:momease/src/features/articles/domain/entities/article_entity.dart';
 
 void main() {
   final tArticleModel = ArticleModel(
@@ -14,7 +15,7 @@ void main() {
 
   test('should be a subclass of ArticleEntity', () {
     // assert
-    expect(tArticleModel, isA<ArticleModel>());
+    expect(tArticleModel, isA<ArticleEntity>());
   });
 
   group('fromJson', () {

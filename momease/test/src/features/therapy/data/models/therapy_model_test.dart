@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:momease/src/features/therapy/data/models/therapy_model.dart';
+import 'package:momease/src/features/therapy/domain/entities/therapy_entity.dart';
 
 void main() {
   const tTherapyModel = TherapyModel(
@@ -11,7 +12,7 @@ void main() {
 
   test('should be a subclass of TherapyEntity', () {
     // assert
-    expect(tTherapyModel, isA<TherapyModel>());
+    expect(tTherapyModel, isA<TherapyEntity>());
   });
 
   group('fromJson', () {

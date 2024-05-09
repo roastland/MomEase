@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:momease/src/features/community/data/models/community_model.dart';
+import 'package:momease/src/features/community/domain/entities/community_entity.dart';
 
 void main() {
   const tCommunityModel = CommunityModel(
@@ -11,7 +12,7 @@ void main() {
 
   test('should be a subclass of CommunityEntity', () {
     // assert
-    expect(tCommunityModel, isA<CommunityModel>());
+    expect(tCommunityModel, isA<CommunityEntity>());
   });
 
   group('fromJson', () {
