@@ -5,28 +5,28 @@
       "topic": "Breastfeeding",
       "imageUrl": "./assets/images/community/community_1.png",
       "description": "Solutions for breastfeeding difficulties",
-      "count_post": 10000
+      "countPost": 10000
     },
     {
       "id": 2,
       "topic": "Milk Pumping",
       "imageUrl": "./assets/images/community/community_2.png",
       "description": "Practical tips and guidance that can help you",
-      "count_post": 10000
+      "countPost": 10000
     },
     {
       "id": 3,
       "topic": "Restful SLeep",
       "imageUrl": "./assets/images/community/community_3.png",
       "description": "Help you facing sleep disruptions",
-      "count_post": 10000
+      "countPost": 10000
     },
     {
       "id": 4,
       "topic": "Goodbye to Baby Blues",
       "imageUrl": "./assets/images/community/community_4.png",
       "description": "Overcoming postpartum emotional challenges",
-      "count_post": 10000
+      "countPost": 10000
     }
   ]
 }

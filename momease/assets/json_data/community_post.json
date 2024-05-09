@@ -2,21 +2,21 @@
   "data": [
     {
       "id": 1,
-      "topic_id": 1,
+      "topicId": 1,
       "username": "Claire B.",
       "text": "I'm feeling overwhelmed by breastfeeding. Any tips for establishing a good routine?",
       "timestamp": "2024-05-01 12:00:00",
-      "count_comments": 12,
-      "count_views": 200
+      "countComments": 12,
+      "countViews": 200
     },
     {
       "id": 2,
-      "topic_id": 1,
+      "topicId": 1,
       "username": "Jennie C.",
       "text": "My baby has a bad latch - breastfeeding is painful! What can I do?",
       "timestamp": "2024-05-01 12:00:00",
-      "count_comments": 10,
-      "count_views": 100
+      "countComments": 10,
+      "countViews": 100
     }
   ]
 }

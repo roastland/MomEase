@@ -2,7 +2,7 @@
     "data": [
       {
         "id": 1,
-        "exercise_id": 1,
+        "exerciseId": 1,
         "title": "Yoga for Pelvic Floor Strength",
         "imageUrl": "./assets/images/exercise/yoga_1.png",
         "description": "",
@@ -10,7 +10,7 @@
       },
       {
         "id": 2,
-        "exercise_id": 1,
+        "exerciseId": 1,
         "title": "Yoga for Balance and Coordination",
         "imageUrl": "./assets/images/exercise/yoga_2.png",
         "description": "",
@@ -18,7 +18,7 @@
       },
       {
         "id": 3,
-        "exercise_id": 1,
+        "exerciseId": 1,
         "title": "Yoga Ball Workouts",
         "imageUrl": "./assets/images/exercise/yoga_3.png",
         "description": "",
