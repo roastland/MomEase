@@ -4,7 +4,7 @@ import 'package:momease/src/core/usecases/usecase.dart';
 import 'package:momease/src/features/exercise/domain/entities/exercise_entity.dart';
 import 'package:momease/src/features/exercise/domain/repositories/exercise_repository.dart';
 
-class GetExerciseList extends UseCase<List<ExerciseEntity>, NoParams> {
+class GetExerciseList implements UseCase<List<ExerciseEntity>, NoParams> {
   final ExerciseRepository repository;
 
   GetExerciseList(this.repository);

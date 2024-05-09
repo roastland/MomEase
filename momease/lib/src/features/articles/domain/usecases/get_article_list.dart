@@ -4,7 +4,7 @@ import 'package:momease/src/core/usecases/usecase.dart';
 import 'package:momease/src/features/articles/domain/entities/article_entity.dart';
 import 'package:momease/src/features/articles/domain/repositories/article_repository.dart';
 
-class GetArticleList extends UseCase<List<ArticleEntity>, NoParams> {
+class GetArticleList implements UseCase<List<ArticleEntity>, NoParams> {
   final ArticleRepository repository;
 
   GetArticleList(this.repository);
