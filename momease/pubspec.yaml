@@ -26,6 +26,8 @@ dependencies:
   meta: ^1.11.0
   path: ^1.9.0
   sqflite: ^2.3.3+1
+  flutter_dotenv: ^5.1.0
+  http: ^1.2.1
 
 dev_dependencies:
   flutter_test:
@@ -52,3 +54,6 @@ flutter:
     - assets/images/therapy/
     # Add assets from the json_data directory to the application.
     - assets/json_data/
+    # Add env variable
+    - assets/.env
+    - .env
