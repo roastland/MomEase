@@ -24,6 +24,11 @@ import 'package:momease/src/features/exercise/data/repositories/exercise_reposit
 import 'package:momease/src/features/exercise/domain/repositories/exercise_repository.dart';
 import 'package:momease/src/features/exercise/domain/usecases/get_exercise_list.dart';
 import 'package:momease/src/features/exercise/presentation/bloc/exercise_bloc.dart';
+import 'package:momease/src/features/journal/data/datasources/journal_local_data_source.dart';
+import 'package:momease/src/features/journal/data/repositories/journal_repository_impl.dart';
+import 'package:momease/src/features/journal/domain/repositories/journal_repository.dart';
+import 'package:momease/src/features/journal/domain/usecases/get_journal_entries.dart';
+import 'package:momease/src/features/journal/presentation/bloc/journal_bloc.dart';
 import 'package:momease/src/features/therapy/data/datasources/therapy_local_data_source.dart';
 import 'package:momease/src/features/therapy/data/repositories/therapy_repository_impl.dart';
 import 'package:momease/src/features/therapy/domain/repositories/therapy_repository.dart';
@@ -40,6 +45,7 @@ Future<void> init() async {
   sl.registerFactory(() => CommunityBloc(getCommunityList: sl()));
   sl.registerFactory(() => CommunityDetailsPostBloc(
       getCommunityPostList: sl(), createCommunityPost: sl()));
+  sl.registerFactory(() => JournalBloc(getJournalList: sl()));
 
   // Use cases
   sl.registerLazySingleton(() => GetTherapyList(sl()));
@@ -48,6 +54,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetCommunityList(sl()));
   sl.registerLazySingleton(() => GetCommunityPostList(sl()));
   sl.registerLazySingleton(() => CreateCommunityPost(sl()));
+  sl.registerLazySingleton(() => GetJournalEntries(sl()));
 
   // Repository
   sl.registerLazySingleton<TherapyRepository>(
@@ -60,6 +67,8 @@ Future<void> init() async {
       () => CommunityRepositoryImpl(localDataSource: sl()));
   sl.registerLazySingleton<CommunityPostRepository>(
       () => CommunityPostRepositoryImpl(localDataSource: sl()));
+  sl.registerLazySingleton<JournalRepository>(
+      () => JournalRepositoryImpl(localDataSource: sl()));
 
   // Data sources
   sl.registerLazySingleton<TherapyLocalDataSource>(
@@ -72,6 +81,8 @@ Future<void> init() async {
       () => CommunityLocalDataSourceImpl(database: sl()));
   sl.registerLazySingleton<CommunityPostLocalDataSource>(
       () => CommunityPostLocalDataSourceImpl(database: sl()));
+  sl.registerLazySingleton<JournalLocalDataSource>(
+      () => JournalLocalDataSourceImpl(database: sl()));
 
   // Core
   sl.registerFactory(() => CustomNavigationBarCubit());

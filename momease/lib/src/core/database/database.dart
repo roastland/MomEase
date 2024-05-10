@@ -2,6 +2,7 @@ import 'package:momease/src/features/articles/data/models/article_model.dart';
 import 'package:momease/src/features/community/data/models/community_model.dart';
 import 'package:momease/src/features/community/data/models/community_post_model.dart';
 import 'package:momease/src/features/exercise/data/models/exercise_model.dart';
+import 'package:momease/src/features/journal/data/models/journal_model.dart';
 import 'package:momease/src/features/therapy/data/models/therapy_model.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -95,6 +96,15 @@ class AppDatabase {
           REFERENCES community (id)
             ON DELETE CASCADE
       )
+    ''',
+    6: '''
+      CREATE TABLE journal (
+        date TEXT NOT NULL,
+        title TEXT NOT NULL,
+        mood TEXT NOT NULL,
+        journalText TEXT NOT NULL,
+        PRIMARY KEY (date)
+      )
     '''
   };
 
@@ -125,6 +135,12 @@ class AppDatabase {
   Future<int> createCommunityPost(CommunityPostModel communityPost) async {
     final db = await instance.database;
     return await db.insert('community_post', communityPost.toJson(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+
+  Future<int> createJournal(JournalModel journal) async {
+    final db = await instance.database;
+    return await db.insert('journal', journal.toJson(),
         conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
@@ -167,6 +183,12 @@ class AppDatabase {
       whereArgs: [topicId],
     );
     return maps.map((json) => CommunityPostModel.fromJson(json)).toList();
+  }
+
+  Future<List<JournalModel>> readAllJournal() async {
+    final db = await instance.database;
+    final maps = await db.query('journal');
+    return maps.map((json) => JournalModel.fromJson(json)).toList();
   }
 
   Future updateTherapy(TherapyModel therapy) async {
@@ -224,6 +246,17 @@ class AppDatabase {
     );
   }
 
+  Future updateJournal(JournalModel journal) async {
+    final db = await instance.database;
+    await db.update(
+      'journal',
+      journal.toJson(),
+      where: 'date = ?',
+      whereArgs: [journal.date],
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
   Future<int> deleteSelectedTherapy(int id) async {
     final db = await instance.database;
     return await db.delete(
@@ -269,6 +302,15 @@ class AppDatabase {
     );
   }
 
+  Future<int> deleteSelectedJournal(String date) async {
+    final db = await instance.database;
+    return await db.delete(
+      'journal',
+      where: 'date = ?',
+      whereArgs: [date],
+    );
+  }
+
   Future<int> deleteAllTherapy() async {
     final db = await instance.database;
     return await db.delete('therapy');
@@ -294,12 +336,18 @@ class AppDatabase {
     return await db.delete('community_post');
   }
 
+  Future<int> deleteAllJournal() async {
+    final db = await instance.database;
+    return await db.delete('journal');
+  }
+
   Future deleteAllTable() async {
     await deleteAllTherapy();
     await deleteAllExercise();
     await deleteAllArticle();
     await deleteAllCommunity();
     await deleteAllCommunityPost();
+    await deleteAllJournal();
   }
 
   Future close() async {

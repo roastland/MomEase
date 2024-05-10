@@ -10,6 +10,7 @@ import 'package:momease/src/features/articles/presentation/bloc/articles_bloc.da
 import 'package:momease/src/features/community/presentation/bloc/community_bloc.dart';
 import 'package:momease/src/features/community/presentation/bloc/community_details_post_bloc.dart';
 import 'package:momease/src/features/exercise/presentation/bloc/exercise_bloc.dart';
+import 'package:momease/src/features/journal/presentation/bloc/journal_bloc.dart';
 import 'package:momease/src/features/therapy/presentation/bloc/therapy_bloc.dart';
 import 'package:momease/src/screens/pages/community_page.dart';
 import 'package:momease/src/screens/pages/home_page.dart';
@@ -37,7 +38,8 @@ class Landing extends StatelessWidget {
         BlocProvider<ArticlesBloc>(create: (context) => sl<ArticlesBloc>()),
         BlocProvider<CommunityBloc>(create: (context) => sl<CommunityBloc>()),
         BlocProvider<CommunityDetailsPostBloc>(
-            create: (context) => sl<CommunityDetailsPostBloc>())
+            create: (context) => sl<CommunityDetailsPostBloc>()),
+        BlocProvider<JournalBloc>(create: (context) => sl<JournalBloc>()),
       ],
       child: BlocConsumer<CustomNavigationBarCubit, CustomNavigationBarState>(
         listener: (context, state) {
