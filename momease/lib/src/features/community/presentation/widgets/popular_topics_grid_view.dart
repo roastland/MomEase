@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:momease/src/features/community/presentation/bloc/community_bloc.dart';
+import 'package:momease/src/features/community/presentation/pages/community_detail_page.dart';
 import 'package:momease/src/features/community/presentation/widgets/community_topic_card.dart';
 
 class PopularTopicsGridView extends StatefulWidget {
@@ -34,14 +35,14 @@ class _PopularTopicsGridViewState extends State<PopularTopicsGridView> {
               children: state.communityList.map((item) {
                 return GestureDetector(
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => CommunityDetailPage(
-                      //       communityItem: item,
-                      //     ),
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CommunityDetailPage(
+                            communityItem: item,
+                          ),
+                        ),
+                      );
                     },
                     child: CommunityTopicCard(communityItem: item));
               }).toList());

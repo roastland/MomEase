@@ -127,12 +127,17 @@ void main() {
       // arrange
       when(mockCreateCommunityPost(any))
           .thenAnswer((_) async => Right(tCommunityPost3.id));
+      when(mockGetCommunityPostList(any))
+          .thenAnswer((_) async => Right(tCommunityPostList));
       // act
       bloc.add(CreateCommunityDetailsPost(tCommunityPost3));
+      bloc.add(const FetchCommunityDetailsPost(1));
       await untilCalled(mockCreateCommunityPost(any));
+      await untilCalled(mockGetCommunityPostList(any));
       // assert
       verify(mockCreateCommunityPost(
           CreateCommunityPostParams(communityPost: tCommunityPost3)));
+      verify(mockGetCommunityPostList(const CommunityPostParams(topicId: 1)));
     });
 
     test(
@@ -141,14 +146,36 @@ void main() {
       // arrange
       when(mockCreateCommunityPost(any))
           .thenAnswer((_) async => Right(tCommunityPost3.id));
+      when(mockGetCommunityPostList(any))
+          .thenAnswer((_) async => Right(tCommunityPostList));
       // assert later
       final expected = [
         CommunityDetailsPostLoading(),
-        CommunityPostCreated(tCommunityPost3.id),
+        CommunityDetailsPostLoaded(tCommunityPostList),
       ];
       expectLater(bloc.stream, emitsInOrder(expected));
       // act
       bloc.add(CreateCommunityDetailsPost(tCommunityPost3));
+      bloc.add(const FetchCommunityDetailsPost(1));
+    });
+
+    test(
+        'should emit [CommunityDetailsPostLoading, FailureState] when creating data success but fetching data fails',
+        () async {
+      // arrange
+      when(mockCreateCommunityPost(any))
+          .thenAnswer((_) async => Right(tCommunityPost3.id));
+      when(mockGetCommunityPostList(any))
+          .thenAnswer((_) async => Left(CacheFailure()));
+      // assert later
+      final expected = [
+        CommunityDetailsPostLoading(),
+        const FailureState(CACHE_FAILURE_CODE, CACHE_FAILURE_MESSAGE),
+      ];
+      expectLater(bloc.stream, emitsInOrder(expected));
+      // act
+      bloc.add(CreateCommunityDetailsPost(tCommunityPost3));
+      bloc.add(const FetchCommunityDetailsPost(1));
     });
 
     test(
@@ -157,21 +184,7 @@ void main() {
       // arrange
       when(mockCreateCommunityPost(any))
           .thenAnswer((_) async => Left(CacheFailure()));
-      // assert later
-      final expected = [
-        CommunityDetailsPostLoading(),
-        const FailureState(CACHE_FAILURE_CODE, CACHE_FAILURE_MESSAGE),
-      ];
-      expectLater(bloc.stream, emitsInOrder(expected));
-      // act
-      bloc.add(CreateCommunityDetailsPost(tCommunityPost3));
-    });
-
-    test(
-        'should emit [CommunityDetailsPostLoading, FailureState] with proper error message',
-        () async {
-      // arrange
-      when(mockCreateCommunityPost(any))
+      when(mockGetCommunityPostList(any))
           .thenAnswer((_) async => Left(CacheFailure()));
       // assert later
       final expected = [
@@ -181,6 +194,7 @@ void main() {
       expectLater(bloc.stream, emitsInOrder(expected));
       // act
       bloc.add(CreateCommunityDetailsPost(tCommunityPost3));
+      bloc.add(const FetchCommunityDetailsPost(1));
     });
   });
 }

@@ -9,10 +9,16 @@ import 'package:momease/src/features/articles/domain/repositories/article_reposi
 import 'package:momease/src/features/articles/domain/usecases/get_article_list.dart';
 import 'package:momease/src/features/articles/presentation/bloc/articles_bloc.dart';
 import 'package:momease/src/features/community/data/datasources/community_local_data_source.dart';
+import 'package:momease/src/features/community/data/datasources/community_post_local_data_source.dart';
+import 'package:momease/src/features/community/data/repositories/community_post_repository_impl.dart';
 import 'package:momease/src/features/community/data/repositories/community_repository_impl.dart';
+import 'package:momease/src/features/community/domain/repositories/community_post_repository.dart';
 import 'package:momease/src/features/community/domain/repositories/community_repository.dart';
+import 'package:momease/src/features/community/domain/usecases/create_community_post.dart';
 import 'package:momease/src/features/community/domain/usecases/get_community_list.dart';
+import 'package:momease/src/features/community/domain/usecases/get_community_post_list.dart';
 import 'package:momease/src/features/community/presentation/bloc/community_bloc.dart';
+import 'package:momease/src/features/community/presentation/bloc/community_details_post_bloc.dart';
 import 'package:momease/src/features/exercise/data/datasources/exercise_local_data_source.dart';
 import 'package:momease/src/features/exercise/data/repositories/exercise_repository_impl.dart';
 import 'package:momease/src/features/exercise/domain/repositories/exercise_repository.dart';
@@ -32,12 +38,16 @@ Future<void> init() async {
   sl.registerFactory(() => ExerciseBloc(getExerciseList: sl()));
   sl.registerFactory(() => ArticlesBloc(getArticleList: sl()));
   sl.registerFactory(() => CommunityBloc(getCommunityList: sl()));
+  sl.registerFactory(() => CommunityDetailsPostBloc(
+      getCommunityPostList: sl(), createCommunityPost: sl()));
 
   // Use cases
   sl.registerLazySingleton(() => GetTherapyList(sl()));
   sl.registerLazySingleton(() => GetExerciseList(sl()));
   sl.registerLazySingleton(() => GetArticleList(sl()));
   sl.registerLazySingleton(() => GetCommunityList(sl()));
+  sl.registerLazySingleton(() => GetCommunityPostList(sl()));
+  sl.registerLazySingleton(() => CreateCommunityPost(sl()));
 
   // Repository
   sl.registerLazySingleton<TherapyRepository>(
@@ -48,6 +58,8 @@ Future<void> init() async {
       () => ArticleRepositoryImpl(localDataSource: sl()));
   sl.registerLazySingleton<CommunityRepository>(
       () => CommunityRepositoryImpl(localDataSource: sl()));
+  sl.registerLazySingleton<CommunityPostRepository>(
+      () => CommunityPostRepositoryImpl(localDataSource: sl()));
 
   // Data sources
   sl.registerLazySingleton<TherapyLocalDataSource>(
@@ -58,6 +70,8 @@ Future<void> init() async {
       () => ArticleLocalDataSourceImpl(database: sl()));
   sl.registerLazySingleton<CommunityLocalDataSource>(
       () => CommunityLocalDataSourceImpl(database: sl()));
+  sl.registerLazySingleton<CommunityPostLocalDataSource>(
+      () => CommunityPostLocalDataSourceImpl(database: sl()));
 
   // Core
   sl.registerFactory(() => CustomNavigationBarCubit());
