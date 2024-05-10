@@ -5,7 +5,8 @@ abstract class CommunityPostLocalDataSource {
   Future<List<CommunityPostModel>> getCommunityPostList(int topicId);
   Future<void> cacheCommunityPosts(
       List<CommunityPostModel> communityPostToCache);
-  Future<int> createCommunityPost(CommunityPostModel communityPost);
+  Future<List<CommunityPostModel>> createCommunityPost(
+      CommunityPostModel communityPost);
 }
 
 class CommunityPostLocalDataSourceImpl implements CommunityPostLocalDataSource {
@@ -29,7 +30,10 @@ class CommunityPostLocalDataSourceImpl implements CommunityPostLocalDataSource {
   }
 
   @override
-  Future<int> createCommunityPost(CommunityPostModel communityPost) {
-    return _database.createCommunityPost(communityPost);
+  Future<List<CommunityPostModel>> createCommunityPost(
+      CommunityPostModel communityPost) async {
+    await _database.createCommunityPost(communityPost);
+
+    return await _database.readCommunityPostCertainTopic(communityPost.topicId);
   }
 }

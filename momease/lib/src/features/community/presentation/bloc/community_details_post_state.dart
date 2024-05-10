@@ -21,15 +21,6 @@ class CommunityDetailsPostLoaded extends CommunityDetailsPostState {
   List<Object> get props => [communityPostList];
 }
 
-class CommunityPostCreated extends CommunityDetailsPostState {
-  final int communityPostId;
-
-  const CommunityPostCreated(this.communityPostId);
-
-  @override
-  List<Object> get props => [communityPostId];
-}
-
 class FailureState extends CommunityDetailsPostState {
   final int statusCode;
   final String message;

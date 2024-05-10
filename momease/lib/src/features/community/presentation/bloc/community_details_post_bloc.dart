@@ -24,27 +24,38 @@ class CommunityDetailsPostBloc
         emit(CommunityDetailsPostLoading());
         final result = await getCommunityPostList(
             CommunityPostParams(topicId: event.topicId));
-        result.fold(
-          (failure) {
+        await result.fold(
+          (failure) async {
             var (statusCode, message) = _mapFailureToMessage(failure);
             emit(FailureState(statusCode, message));
           },
-          (communityPostList) {
+          (communityPostList) async {
             this.communityPostList = communityPostList;
             emit(CommunityDetailsPostLoaded(communityPostList));
           },
         );
       } else if (event is CreateCommunityDetailsPost) {
         emit(CommunityDetailsPostLoading());
-        final result = await createCommunityPost(
+        final postCreated = await createCommunityPost(
             CreateCommunityPostParams(communityPost: event.communityPost));
-        result.fold(
-          (failure) {
+        final result = await getCommunityPostList(
+            CommunityPostParams(topicId: event.communityPost.topicId));
+        await postCreated.fold(
+          (failure) async {
             var (statusCode, message) = _mapFailureToMessage(failure);
             emit(FailureState(statusCode, message));
           },
-          (communityPostId) {
-            emit(CommunityPostCreated(communityPostId));
+          (r) async {
+            await result.fold(
+              (failure) async {
+                var (statusCode, message) = _mapFailureToMessage(failure);
+                emit(FailureState(statusCode, message));
+              },
+              (communityPostList) async {
+                this.communityPostList = communityPostList;
+                emit(CommunityDetailsPostLoaded(communityPostList));
+              },
+            );
           },
         );
       }

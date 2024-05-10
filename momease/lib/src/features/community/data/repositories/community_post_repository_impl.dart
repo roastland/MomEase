@@ -34,12 +34,14 @@ class CommunityPostRepositoryImpl implements CommunityPostRepository {
   }
 
   @override
-  Future<Either<Failure, int>> createCommunityPost(
+  Future<Either<Failure, List<CommunityPostEntity>>> createCommunityPost(
       CommunityPostEntity communityPost) async {
     try {
-      final postId = await localDataSource
+      await localDataSource
           .createCommunityPost(communityPost as CommunityPostModel);
-      return Right(postId);
+      final localCommunityPost =
+          await localDataSource.getCommunityPostList(communityPost.topicId);
+      return Right(localCommunityPost);
     } on CacheException {
       return Left(CacheFailure());
     }

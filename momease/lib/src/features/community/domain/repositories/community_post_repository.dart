@@ -5,6 +5,6 @@ import 'package:momease/src/features/community/domain/entities/community_post_en
 abstract class CommunityPostRepository {
   Future<Either<Failure, List<CommunityPostEntity>>> getCommunityPostList(
       int topicId);
-  Future<Either<Failure, int>> createCommunityPost(
+  Future<Either<Failure, List<CommunityPostEntity>>> createCommunityPost(
       CommunityPostEntity communityPost);
 }

@@ -5,13 +5,15 @@ import 'package:momease/src/core/usecases/usecase.dart';
 import 'package:momease/src/features/community/domain/entities/community_post_entity.dart';
 import 'package:momease/src/features/community/domain/repositories/community_post_repository.dart';
 
-class CreateCommunityPost implements UseCase<int, CreateCommunityPostParams> {
+class CreateCommunityPost
+    implements UseCase<List<CommunityPostEntity>, CreateCommunityPostParams> {
   final CommunityPostRepository repository;
 
   CreateCommunityPost(this.repository);
 
   @override
-  Future<Either<Failure, int>> call(CreateCommunityPostParams params) async {
+  Future<Either<Failure, List<CommunityPostEntity>>> call(
+      CreateCommunityPostParams params) async {
     return await repository.createCommunityPost(params.communityPost);
   }
 }
